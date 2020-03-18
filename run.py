@@ -107,7 +107,7 @@ def train(epoch: int, device: torch.device):
             
             score_positive, score_negitive = model.forward(qid_materials, posqid_materials,
                             negqid_materials, domains_mat)
-            print(score_positive, score_negitive)
+            # print(score_positive, score_negitive)
             loss = ploss(score_positive, score_negitive)
 
             total_loss += loss.item()
@@ -156,8 +156,8 @@ def train(epoch: int, device: torch.device):
             while topn <= 10:
                 precision_at, recall_at, F1_value_at, _ = Rank_precision_recall_at(
                         qid_score_label, qid_all_posnum, topn)
-                # print(("epoch = {0}, top n ={1},precision_at={2}, recall_at={3}, F1_value_at={4}".format(
-                #         i, topn, precision_at, recall_at, F1_value_at)))
+                print(("epoch = {0}, top n ={1},precision_at={2}, recall_at={3}, F1_value_at={4}".format(
+                        i, topn, precision_at, recall_at, F1_value_at)))
                 sys.stdout.flush()
                 with open(os.path.join(output, 'test_result.txt'), 'a+') as outfile:
                     outfile.write(("epoch = {0},top n ={1}, precision_at={2}, recall_at={3}, F1_value_at={4}\n".format(
